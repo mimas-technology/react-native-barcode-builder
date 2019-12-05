@@ -50,7 +50,7 @@ export default class Barcode extends PureComponent {
 
   componentDidUpdate(prevProps) {
     if (prevProps.value !== this.props.value) {
-      this.update(prevProps);
+      this.update(this.props);
     }
   }
 
