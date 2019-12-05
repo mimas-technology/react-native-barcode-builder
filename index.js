@@ -48,17 +48,13 @@ export default class Barcode extends PureComponent {
     };
   }
 
-  componentWillUpdate(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      this.update(nextProps);
+  componentWillUpdate(prevProps) {
+    if (prevProps.value !== this.props.value) {
+      this.update(prevProps);
     }
   }
 
   componentDidMount() {
-    this.update();
-  }
-
-  componentDidUpdate() {
     this.update();
   }
 
@@ -125,7 +121,7 @@ export default class Barcode extends PureComponent {
   // encode() handles the Encoder call and builds the binary string to be rendered
   encode(text, Encoder, options) {
     // If text is not a non-empty string, throw error.
-    if (typeof text !== "string" || text.length === 0) {
+    if (typeof text !== 'string' || text.length === 0) {
       if (this.props.onError) {
         this.props.onError(new Error('Barcode value must be a non-empty string'));
         return;
