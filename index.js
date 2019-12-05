@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ViewPropTypes } from 'react-native';
 
 import PropTypes from 'prop-types';
 import { Surface, Shape } from '@react-native-community/art';
@@ -22,8 +22,8 @@ export default class Barcode extends PureComponent {
     lineColor: PropTypes.string,
     /* Set the color of the text. */
     textColor: PropTypes.string,
-    /* Set the background of the barcode. */
-    background: PropTypes.string,
+    /* Set the container style of the barcode. */
+    containerStyle: ViewPropTypes.style,
     /* Handle error for invalid barcode of selected format */
     onError: PropTypes.func
   };
@@ -163,11 +163,8 @@ export default class Barcode extends PureComponent {
 
   render() {
     this.update();
-    const backgroundStyle = {
-      backgroundColor: this.props.background
-    };
     return (
-      <View style={[styles.svgContainer, backgroundStyle]}>
+      <View style={[styles.svgContainer, this.props.containerStyle]}>
         <Surface height={this.props.height} width={this.state.barCodeWidth}>
           <Shape d={this.state.bars} fill={this.props.lineColor} />
         </Surface>
@@ -182,6 +179,5 @@ export default class Barcode extends PureComponent {
 const styles = StyleSheet.create({
   svgContainer: {
     alignItems: 'center',
-    padding: 10
   }
 });
