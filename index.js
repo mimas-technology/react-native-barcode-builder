@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, ART, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
+
 import PropTypes from 'prop-types';
+import { Surface, Shape } from '@react-native-community/art';
 
 import barcodes from 'jsbarcode/src/barcodes';
-
-const { Surface, Shape } = ART;
 
 export default class Barcode extends PureComponent {
   static propTypes = {
@@ -139,7 +139,7 @@ export default class Barcode extends PureComponent {
       encoder = new Encoder(text, options);
     } catch (error) {
       // If the encoder could not be instantiated, throw error.
-      if (this.props.onError)  {
+      if (this.props.onError) {
         this.props.onError(new Error('Invalid barcode format.'));
         return;
       }
@@ -175,8 +175,8 @@ export default class Barcode extends PureComponent {
         <Surface height={this.props.height} width={this.state.barCodeWidth}>
           <Shape d={this.state.bars} fill={this.props.lineColor} />
         </Surface>
-        { typeof(this.props.text) != 'undefined' &&
-          <Text style={{color: this.props.textColor, width: this.state.barCodeWidth, textAlign: 'center'}} >{this.props.text}</Text>
+        {typeof (this.props.text) != 'undefined' &&
+          <Text style={{ color: this.props.textColor, width: this.state.barCodeWidth, textAlign: 'center' }} >{this.props.text}</Text>
         }
       </View>
     );
